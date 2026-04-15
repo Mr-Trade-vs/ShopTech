@@ -10,9 +10,12 @@ public class ServerTechShop {
     private ExecutorService pool;
     private ServerSocket serverSocket;
 
+    private int solutionToClient;
+
     public ServerTechShop(ExecutorService pool, ServerSocket serverSocket) {
         this.pool = pool;
         this.serverSocket = serverSocket;
+        this.solutionToClient = 0;
     }
 
     public void execute() {
@@ -27,6 +30,19 @@ public class ServerTechShop {
             pool.shutdown();
             System.out.println("Surgio un error: " + e.getMessage());
         }
+    }
+
+    public int validateRequestClient(String msg) {
+        switch (msg) {
+            case "1":
+                return this.solutionToClient = 1;
         
+            case "2":
+                return this.solutionToClient = 2;
+
+            case "3":
+                return this.solutionToClient = 3;
+        }
+        return 0;
     }
 }

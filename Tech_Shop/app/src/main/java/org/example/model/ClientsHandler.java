@@ -32,19 +32,13 @@ public class ClientsHandler implements Runnable {
                     rd.close();
                     clientSocket.close();
                 }
-
-                System.out.println(clientSocket.getInetAddress()+ "\n" +
-                clientSocket.getPort() + "\n" +
-                msg);
-
             }
 
         } catch (IOException e) {
             System.out.println("Surgio un problema: " + e.getMessage());
         }
-
     }
 
-
+    
     
 }

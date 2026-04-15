@@ -34,7 +34,7 @@ public class ShopApp {
                 break;
                 
             case 2:
-                main.menuClient(controllerCommunication);
+                main.menuClient(controllerCommunication, rd);
                 break;
 
             default:
@@ -54,10 +54,32 @@ public class ShopApp {
         
     }
 
-    public void menuClient(ControllerCommunication controller) {
+    public void menuClient(ControllerCommunication controller, Scanner rd) {
 
-        System.out.println("Sending messages to server...");
+        //Initialize channel where client'll communicate with server
+
         controller.startClient();
 
+        System.out.println( "__________________________________\n" + 
+                            "¿What do you want to do this time?\n" +
+                            "[1] See Products\n" +
+                            "[2] Buy a Product\n" +
+                            "[3] Contact Support\n" +
+                            "[4] Return\n" +
+                            "__________________________________\n"
+        );
+
+        int option = rd.nextInt();
+        rd.nextLine();
+
+        switch (option) {
+            case 1:
+                
+                break;
+        
+            default:
+                break;
+        }
+        
     }
 }

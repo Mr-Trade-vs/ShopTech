@@ -8,6 +8,20 @@ public class ControllerProducts {
     
     LinkedList<Product> listProducts = new LinkedList<Product>();
 
+    public String printProducts() {
+        if (listProducts != null) {
+            return printProducts(listProducts);
+        } else return "List of products actually is empty";
+    }
+
+    private String printProducts(LinkedList<Product> products) {
+        String listToPrint = "";
+        if (products != null) {
+            listToPrint += products.pop();
+            printProducts(products);
+        } return listToPrint;
+    }
+
     public Product searchProduct(int id) {
 
         if (listProducts != null) return searchProduct(id, listProducts);

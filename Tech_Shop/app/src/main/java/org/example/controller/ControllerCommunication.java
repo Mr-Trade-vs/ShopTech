@@ -24,10 +24,18 @@ public class ControllerCommunication {
             server.execute();
         } catch (IOException e) {
             System.out.println("Ha surgido un error: " + e.getMessage());
-        }
-        
+        }   
     }
 
+    /*
+    At this points I see it's a good way modify the controller and separate to make
+    ServerControllerCommunication | ClientControllerCommunication
+    I'll make that after implement the request of the task :D
+    */
+    public void clientRequest(String msg) {
 
+        if (client == null) client = new ClientShop(5000, "192.168.1.19");
+        client.connection(msg);
 
+    }
 }
