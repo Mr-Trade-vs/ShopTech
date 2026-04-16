@@ -50,14 +50,15 @@ public class Product {
         if (totalRequest > stock) {
             return 0;
         }
-
         return totalRequest * price;
     }
 
-    public void reduceStock(int totalRequest) {
-
-        if (totalRequest > stock) System.out.println("You're request it's bigger than stock");
-        else this.stock =  this.stock - totalRequest;
+    public synchronized boolean reduceStock(int totalRequest) {
+        if (totalRequest > stock) {
+            return false;
+        }
+        this.stock = this.stock - totalRequest;
+        return true;
     }
 
     @Override
@@ -66,7 +67,7 @@ public class Product {
                 "Id: " + id + "\n" +
                 "Nombre de Producto: " + name + "\n" +
                 "Stock Actual: " + stock + "\n" +
-                "Precio por Unidad: " + price + "\n" +
+                "Precio por Unidad: $" + price + "\n" +
                 "_________________________\n";
     }
 

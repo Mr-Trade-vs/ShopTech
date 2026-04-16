@@ -5,44 +5,35 @@ import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.example.controller.ControllerProducts;
+
 public class ServerTechShop {
     
     private ExecutorService pool;
     private ServerSocket serverSocket;
-
-    private int solutionToClient;
+    private ControllerProducts data;
 
     public ServerTechShop(ExecutorService pool, ServerSocket serverSocket) {
         this.pool = pool;
         this.serverSocket = serverSocket;
-        this.solutionToClient = 0;
+        this.data = new ControllerProducts();
+        data.generateManualProducts();
     }
 
     public void execute() {
-
         try {
             if (pool == null) this.pool = Executors.newFixedThreadPool(3);
             if (serverSocket == null) this.serverSocket = new ServerSocket(5000);
 
-            pool.execute(new ClientsHandler(serverSocket.accept()));
+            System.out.println("Server is ready and waiting for connections...");
+
+            while (true) {
+                pool.execute(new ClientsHandler(serverSocket.accept(), data));
+            }
 
         } catch (IOException e) {
             pool.shutdown();
             System.out.println("Surgio un error: " + e.getMessage());
         }
-    }
-
-    public int validateRequestClient(String msg) {
-        switch (msg) {
-            case "1":
-                return this.solutionToClient = 1;
-        
-            case "2":
-                return this.solutionToClient = 2;
-
-            case "3":
-                return this.solutionToClient = 3;
-        }
-        return 0;
     }
 }
